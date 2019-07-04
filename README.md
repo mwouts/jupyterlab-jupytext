@@ -2,32 +2,12 @@
 
 This extension adds a few [Jupytext](https://github.com/mwouts/jupytext) commands to the command palette. Use these to select the desired ipynb/text pairing for your notebook.
 
-![Jupytext commands](jupytext_commands.png)
+![Jupytext commands](https://github.com/mwouts/jupytext/raw/master/packages/labextension/jupytext_commands.png)
 
 ## Installation
 
-Please [install Jupytext](https://github.com/mwouts/jupytext/blob/master/README.md#installation) first. Make sure Jupyter is configured to use Jupytext's contents manager. Then, install the extension with:
-
-```bash
-jupyter labextension install jupyterlab-jupytext
-```
+The extension is bundled with [Jupytext](https://github.com/mwouts/jupytext/). Please follow the installation instructions for Jupytext.
 
 # How to develop this extension
 
-We started developping the extension following the [xkcd extension tutorial](https://jupyterlab.readthedocs.io/en/stable/developer/xkcd_extension_tutorial.html). Follow the instructions there to create a conda environment in which you will be able to develop the extension. In that environment, install JupyterLab's plugin manager, and the extension with
-```bash
-jlpm install
-jupyter labextension install . --no-build
-```
-
-Then, in another shell on the same environment, start JupyterLab:
-```bash
-jupyter lab --watch
-```
-
-Finally, make changes to the extension and rebuild it (in the first shell) with:
-```bash
-jlpm run build
-```
-
-Refresh the JupyterLab interface and see your changes in action.
+See the [README.md](https://github.com/mwouts/jupytext/blob/master/packages/labextension/README.md) in the `packages/labextension` subfolder of the [Jupytext](https://github.com/mwouts/jupytext/) project.
