@@ -1,5 +1,7 @@
 # A JupyterLab extension for Jupytext
 
+> :warning: This repository is not up-to-date. The extension is now developed in the main [Jupytext](https://github.com/mwouts/jupytext) repository, under [packages/labextension](https://github.com/mwouts/jupytext/tree/master/packages/labextension)
+
 This extension adds a few [Jupytext](https://github.com/mwouts/jupytext) commands to the command palette. Use these to select the desired ipynb/text pairing for your notebook.
 
 ![Jupytext commands](https://github.com/mwouts/jupytext/raw/master/packages/labextension/jupytext_commands.png)
