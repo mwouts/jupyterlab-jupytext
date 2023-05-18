@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/mwouts/jupyterlab-jupytext/issues"
   },
-  "license": "BSD-3-Clause",
+  "license": "MIT",
   "author": {
     "name": "Marc Wouts",
     "email": "marc.wouts@gmail.com"
