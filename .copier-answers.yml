@@ -1,0 +1,19 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: v4.0.4
+_src_path: https://github.com/jupyterlab/extension-template
+author_email: marc.wouts@gmail.com
+author_name: Marc Wouts
+data_format: string
+file_extension: ''
+has_binder: false
+has_settings: false
+kind: frontend
+labextension_name: jupyterlab-jupytext
+mimetype: ''
+mimetype_name: ''
+project_short_description: A JupyterLab extension for Jupytext
+python_name: jupyterlab_jupytext
+repository: https://github.com/mwouts/jupyterlab-jupytext
+test: true
+viewer_name: ''
+
