@@ -1,6 +1,6 @@
 {
   "name": "jupyterlab-jupytext",
-  "version": "1.4.0",
+  "version": "1.4.0-a1",
   "description": "A JupyterLab extension for Jupytext",
   "keywords": [
     "jupyter",
