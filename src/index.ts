@@ -450,7 +450,7 @@ const extension: JupyterFrontEndPlugin<void> = {
     //   Mirror: https://github.com/jupyterlab/jupyterlab/blob/8a8c3752564f37493d4eb6b4c59008027fa83880/packages/notebook-extension/src/index.ts#L860
     const factory = new NotebookWidgetFactory({
       name: "Jupytext Notebook",
-      // label: trans.__("Jupytext Notebook"), // will be needed in JupyterLab 4
+      label: trans.__("Jupytext Notebook"),
       fileTypes: ["markdown", "myst", "r-markdown", "quarto", "julia", "python", "r"],
       modelName: notebookFactory.modelName ?? "notebook",
       preferKernel: notebookFactory.preferKernel ?? true,
