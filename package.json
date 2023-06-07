@@ -1,17 +1,18 @@
 {
   "name": "jupyterlab-jupytext",
-  "version": "0.1.0",
-  "description": "A JupyterLab extension for Jupytext",
+  "version": "1.3.9",
+  "description": "Save Jupyter Notebooks as Scripts or Markdown files that work well with version control & external text editors",
   "keywords": [
     "jupyter",
+    "jupytext",
     "jupyterlab",
     "jupyterlab-extension"
   ],
-  "homepage": "https://github.com/mwouts/jupyterlab-jupytext",
+  "homepage": "https://github.com/mwouts/jupytext/tree/main/packages/labextension",
   "bugs": {
-    "url": "https://github.com/mwouts/jupyterlab-jupytext/issues"
+    "url": "https://github.com/mwouts/jupytext/issues"
   },
-  "license": "BSD-3-Clause",
+  "license": "MIT",
   "author": "Marc Wouts",
   "files": [
     "lib/**/*.{d.ts,eot,gif,html,jpg,js,js.map,json,png,svg,woff2,ttf}",
@@ -21,24 +22,50 @@
   "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mwouts/jupyterlab-jupytext.git"
+    "url": "https://github.com/mwouts/jupytext.git"
   },
   "scripts": {
-    "build": "tsc",
-    "clean": "rimraf lib",
-    "prepare": "npm run clean && npm run build",
-    "watch": "tsc -w"
-  },
-  "dependencies": {
-    "@jupyterlab/application": ">=0.16",
-    "@jupyterlab/apputils": ">=0.16",
-    "@jupyterlab/notebook": ">=0.16"
-  },
-  "devDependencies": {
-    "rimraf": "^2.6.1",
-    "typescript": "~3.1.1"
+    "build": "jlpm run build:lib && jlpm run build:labextension:dev",
+    "build:labextension": "jupyter labextension build .",
+    "build:labextension:dev": "jupyter labextension build --development True .",
+    "build:lib": "tsc",
+    "build:prod": "jlpm run build:lib && jlpm run build:labextension",
+    "clean": "jlpm run clean:lib",
+    "clean:all": "jlpm run clean:lib && jlpm run clean:labextension",
+    "clean:labextension": "rimraf jupyterlab-jupytext/labextension",
+    "clean:lib": "rimraf lib tsconfig.tsbuildinfo",
+    "install:extension": "jupyter labextension develop --overwrite .",
+    "prepare": "jlpm run clean && jlpm run build:prod",
+    "watch": "run-p watch:src watch:labextension",
+    "watch:labextension": "jupyter labextension watch .",
+    "watch:src": "tsc -w"
   },
   "jupyterlab": {
-    "extension": true
+    "discovery": {
+      "server": {
+        "managers": [
+          "pip",
+          "conda"
+        ],
+        "base": {
+          "name": "jupytext"
+        }
+      }
+    },
+    "extension": true,
+    "schemaDir": "schema",
+    "outputDir": "../../jupytext/labextension"
+  },
+  "dependencies": {
+    "@jupyterlab/application": "^3.0.0",
+    "@jupyterlab/apputils": "^3.0.0",
+    "@jupyterlab/nbformat": "^3.0.0",
+    "@jupyterlab/notebook": "^3.0.0"
+  },
+  "devDependencies": {
+    "@jupyterlab/builder": "^3.0.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "typescript": "~4.0.3"
   }
 }
