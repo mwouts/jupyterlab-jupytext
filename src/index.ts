@@ -43,16 +43,16 @@ interface IJupytextFormat {
   label: string;
 }
 
-interface JupytextRepresentation {
+interface IJupytextRepresentation {
   format_name: string;
   extension: string;
 }
 
-interface JupytextSection {
+interface IJupytextSection {
   formats?: string;
   notebook_metadata_filter?: string;
   cell_metadata_filter?: string;
-  text_representation?: JupytextRepresentation;
+  text_representation?: IJupytextRepresentation;
 }
 
 function getJupytextFormats(trans: TranslationBundle): IJupytextFormat[] {
@@ -110,7 +110,7 @@ function getJupytextFormats(trans: TranslationBundle): IJupytextFormat[] {
 const LANGUAGE_INDEPENDENT_NOTEBOOK_EXTENSIONS = ["ipynb", "md", "Rmd", "qmd"];
 
 // will get updated upon activation
-let JLAB4 = true
+let JLAB4 = true;
 
 function get_jupytext_formats(notebook_tracker: INotebookTracker): Array<string> {
   if (!notebook_tracker.currentWidget) return [];
@@ -124,9 +124,9 @@ function get_jupytext_formats(notebook_tracker: INotebookTracker): Array<string>
   //   if (! (model.metadata as any)?.has("jupytext"))
   //     return [];
 
-  const jupytext: JupytextSection = (JLAB4
+  const jupytext: IJupytextSection = (JLAB4
     ? model.getMetadata('jupytext')
-    : (model.metadata as any)?.get('jupytext')) as unknown as JupytextSection;
+    : (model.metadata as any)?.get('jupytext')) as unknown as IJupytextSection;
   if ( ! jupytext )
     return [];
   let formats: Array<string> = jupytext && jupytext.formats ? jupytext.formats.split(',') : [];
@@ -175,9 +175,9 @@ function get_selected_formats(notebook_tracker: INotebookTracker): Array<string>
     // xxx same here, the test is probably not needed
     // if (notebook_tracker.currentWidget.context.model.metadata.has("jupytext")) {
     const model = notebook_tracker.currentWidget.context.model;
-    const jupytext: JupytextSection = (JLAB4
+    const jupytext: IJupytextSection = (JLAB4
       ? model.getMetadata('jupytext')
-      : (model.metadata as any)?.get('jupytext')) as unknown as JupytextSection;
+      : (model.metadata as any)?.get('jupytext')) as unknown as IJupytextSection;
     if (jupytext && jupytext.text_representation && jupytext.text_representation.format_name)
       format_name = jupytext.text_representation.format_name;
     // }
@@ -259,10 +259,10 @@ const extension: JupyterFrontEndPlugin<void> = {
             if ( notebookTracker.currentWidget === null)
               return;
             const model = notebookTracker.currentWidget.context.model;
-            const jupytext: JupytextSection = (JLAB4
+            const jupytext: IJupytextSection = (JLAB4
               ? model.getMetadata('jupytext')
               : (model.metadata as any)?.get('jupytext')
-            ) as unknown as JupytextSection;
+            ) as unknown as IJupytextSection;
           let formats: Array<string> = get_selected_formats(notebookTracker);
 
           // Toggle the selected format
@@ -401,7 +401,7 @@ const extension: JupyterFrontEndPlugin<void> = {
         if (!jupytext_metadata)
           return false;
 
-        const jupytext: JupytextSection = (jupytext_metadata as unknown) as JupytextSection;
+        const jupytext: IJupytextSection = (jupytext_metadata as unknown) as IJupytextSection;
 
         if (jupytext.notebook_metadata_filter === '-all')
           return false;
@@ -419,7 +419,7 @@ const extension: JupyterFrontEndPlugin<void> = {
         if (!jupytext_metadata)
           return false;
 
-        const jupytext: JupytextSection = (jupytext_metadata as unknown) as JupytextSection;
+        const jupytext: IJupytextSection = (jupytext_metadata as unknown) as IJupytextSection;
 
         if (jupytext.notebook_metadata_filter === undefined)
           return true;
@@ -441,7 +441,7 @@ const extension: JupyterFrontEndPlugin<void> = {
         if (!jupytext_metadata)
           return false;
 
-        const jupytext: JupytextSection = (jupytext_metadata as unknown) as JupytextSection;
+        const jupytext: IJupytextSection = (jupytext_metadata as unknown) as IJupytextSection;
 
         if (jupytext.notebook_metadata_filter) {
           delete jupytext.notebook_metadata_filter;
