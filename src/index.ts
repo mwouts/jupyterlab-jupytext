@@ -216,7 +216,8 @@ const extension: JupyterFrontEndPlugin<void> = {
     palette: ICommandPalette | null
   ) => {
     JLAB4 = new SemVer(app.version).compare('4.0.0') >= 0;
-    console.log(`JupyterLab extension jupyterlab-jupytext is activated, JLAB4=${JLAB4}`);
+    console.log("JupyterLab extension jupyterlab-jupytext is activated!");
+    console.debug(`JLAB4=${JLAB4}`);
     const trans = (translator ?? nullTranslator).load("jupytext");
 
     // Jupytext formats
