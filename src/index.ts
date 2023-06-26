@@ -195,7 +195,7 @@ const extension: JupyterFrontEndPlugin<void> = {
     translator: ITranslator | null,
     palette: ICommandPalette | null
   ) => {
-    console.log("JupyterLab extension jupyterlab-jupytext is activated");
+    console.log("JupyterLab extension jupyterlab-jupytext is activated!");
     const trans = (translator ?? nullTranslator).load("jupytext");
 
     // Jupytext formats
