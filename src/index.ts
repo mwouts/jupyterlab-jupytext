@@ -29,9 +29,6 @@ import {
 
 import { markdownIcon } from "@jupyterlab/ui-components";
 
-// used to compute the global JLAB4
-import { SemVer } from "semver";
-
 interface IJupytextFormat {
   /**
    * Conversion format
@@ -215,7 +212,16 @@ const extension: JupyterFrontEndPlugin<void> = {
     translator: ITranslator | null,
     palette: ICommandPalette | null
   ) => {
-    JLAB4 = new SemVer(app.version).compare('4.0.0') >= 0;
+    // https://semver.org/#semantic-versioning-specification-semver
+    // npm semver requires pre-release versions to come with a hyphen
+    // so 7.0.0rc2 won't work with semver
+    // in addition, when running in the notebook7 context, app.version
+    // returns the notebook's version, not jupyterlab !
+    // ignoring the second point for now (it accidentally works...)
+    const app_numbers = app.version.match(/[0-9]+/)
+    if (app_numbers) {
+      JLAB4 = parseInt(app_numbers[0]) >= 4;
+    }
     console.log("JupyterLab extension jupyterlab-jupytext is activated!");
     console.debug(`JLAB4=${JLAB4}`);
     const trans = (translator ?? nullTranslator).load("jupytext");
