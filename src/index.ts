@@ -107,6 +107,8 @@ function getJupytextFormats(trans: TranslationBundle): IJupytextFormat[] {
 const LANGUAGE_INDEPENDENT_NOTEBOOK_EXTENSIONS = ["ipynb", "md", "Rmd", "qmd"];
 
 // will get updated upon activation
+// default is true, and we will turn this off only iff
+// app.name is "JupyterLab" and the version is 3.x or below
 let JLAB4 = true;
 
 function get_jupytext_formats(notebook_tracker: INotebookTracker): Array<string> {
@@ -215,12 +217,13 @@ const extension: JupyterFrontEndPlugin<void> = {
     // https://semver.org/#semantic-versioning-specification-semver
     // npm semver requires pre-release versions to come with a hyphen
     // so 7.0.0rc2 won't work with semver
-    // in addition, when running in the notebook7 context, app.version
-    // returns the notebook's version, not jupyterlab !
-    // ignoring the second point for now (it accidentally works...)
-    const app_numbers = app.version.match(/[0-9]+/)
-    if (app_numbers) {
-      JLAB4 = parseInt(app_numbers[0]) >= 4;
+    // in addition, when running in the notebook7 context, app refers
+    // to the notebook7 application, not the jupyterlab application
+    if (app.name == "JupyterLab") {
+      const app_numbers = app.version.match(/[0-9]+/);
+      if (app_numbers) {
+        JLAB4 = parseInt(app_numbers[0]) >= 4;
+      }
     }
     console.log("JupyterLab extension jupyterlab-jupytext is activated!");
     console.debug(`JLAB4=${JLAB4}`);
